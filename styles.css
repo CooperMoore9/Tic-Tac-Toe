@@ -6,3 +6,24 @@ html {
     box-sizing: inherit;
     margin: 0;
 }
+
+.playerWrapper {
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.gameBoardWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 80vh;
+}
+
+.gameBoard {
+    border-style: dashed;
+    width: 900px;
+    height: 900px;
+}
