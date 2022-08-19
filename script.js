@@ -4,9 +4,12 @@
 
 // Your main goal here is to have as little global code as possible. Try tucking everything away inside of a module or factory. Rule of thumb: if you only ever need ONE of something (gameBoard, displayController), use a module. If you need multiples of something (players!), create them with factories.
 
+// correlate buttons on html to javascript buttons, when you click the buttons add it into the array where the button is
+
 const gameBoard= (() => {
-    const gameBoardArray = []
-    
+    const gameBoardArray = ['', '', '', '', '', '', '', '', '']
+
+    return {gameBoardArray}    
 })();
 
 const Player = (name, marker) => {
@@ -15,5 +18,3 @@ const Player = (name, marker) => {
 
     return {getName, getMarker}
 }
-
-const playerX = Player('fryman', 'X')

@@ -10,8 +10,10 @@ html {
 .playerWrapper {
     display: flex;
     margin-top: 50px;
+    margin-bottom: 50px;
     justify-content: space-around;
     align-items: center;
+    font-size: 32px;
 }
 
 .gameBoardWrapper {
@@ -23,7 +25,22 @@ html {
 }
 
 .gameBoard {
-    border-style: dashed;
-    width: 900px;
-    height: 900px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    aspect-ratio: 1/1;
+    width: 30%;
+    height: auto;
+}
+
+.boardButton {
+    display: flex;
+    border-width: 2px;
+    justify-content: center;
+    align-items: center;
+    font-size: 8vw;
+}
+
+.boardButton:hover {
+    background-color: lightgrey;
 }
