@@ -6,7 +6,7 @@
 
 // correlate buttons on html to javascript buttons, when you click the buttons add it into the array where the button is
 
-const gameBoard= (() => {
+const gameBoard = (() => {
     const gameBoardArray = ['', '', '', '', '', '', '', '', '']
 
     return {gameBoardArray}    
@@ -18,3 +18,35 @@ const Player = (name, marker) => {
 
     return {getName, getMarker}
 }
+
+const Game = () => {
+
+  const boardButtons = document.querySelectorAll('.boardButton');
+  let playerTurn = 'player1'
+  
+  for (btn of boardButtons) {
+      btn.addEventListener('click', function() {
+        if(playerTurn == 'player1'){
+          this.textContent = 'X'
+          playerTurn = 'player2'
+        }else{
+          this.textContent = 'O'
+          playerTurn = 'player1'
+        }
+      });
+    }
+}
+
+// const PlayerSelect = () => {
+//   const playerButtons = document.getElementsByClassName('.playerOne')
+  
+//   playerButtons.addEventListener('click', function() {
+//     console.log('playerOne')
+//   })
+
+// }
+
+console.log(typeof(gameBoard))
+console.log(gameBoard.gameBoardArray)
+// PlayerSelect();
+Game();

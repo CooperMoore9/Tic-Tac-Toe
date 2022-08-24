@@ -16,6 +16,10 @@ html {
     font-size: 32px;
 }
 
+.playerOne, .playerTwo {
+    font-size: 38px;
+}
+
 .gameBoardWrapper {
     display: flex;
     justify-content: center;
