@@ -6,30 +6,28 @@
 
 // correlate buttons on html to javascript buttons, when you click the buttons add it into the array where the button is
 
+// Possible solution to GameState; Every time a button is clicked, check the text context of the board, check which class it has then add it to the array at the class of the html element
+
 const gameBoard = (() => {
-    const gameBoardArray = ['', '', '', '', '', '', '', '', '']
+    let gameBoardArray = ['', '', '', '', '', '', '', '', '']
+    let playerTurn = ''
+    let currentPlayerMarker = ''
 
-    return {gameBoardArray}    
+    return {gameBoardArray, playerTurn, currentPlayerMarker}    
 })();
-
-const Player = (name, marker) => {
-    const getName = () => name
-    const getMarker = () => marker;
-
-    return {getName, getMarker}
-}
 
 const Game = () => {
 
   const boardButtons = document.querySelectorAll('.boardButton');
-  let playerTurn = 'player1'
   
   for (btn of boardButtons) {
       btn.addEventListener('click', function() {
         if(playerTurn == 'player1'){
+          currentPlayerMarker = 'X'
           this.textContent = 'X'
           playerTurn = 'player2'
-        }else{
+        }else if(playerTurn == 'player2'){
+          currentPlayerMarker = 'O'
           this.textContent = 'O'
           playerTurn = 'player1'
         }
@@ -37,16 +35,36 @@ const Game = () => {
     }
 }
 
-// const PlayerSelect = () => {
-//   const playerButtons = document.getElementsByClassName('.playerOne')
+const GameState = () => {
+  const boardButtons = document.querySelectorAll('.boardButton');
+  for (btn of boardButtons) {
+    btn.addEventListener('click', function() {
+      let markerPosition = parseInt(this.id)
+      gameBoard.gameBoardArray.splice(markerPosition, 1, currentPlayerMarker)
+      console.log(gameBoard.gameBoardArray)
+      
+    });
+}
+}
+
+const PlayerSelect = () => {
+  const playerOneButton = document.getElementById('playerOne')
+  const playerTwoButton = document.getElementById('playerTwo')
   
-//   playerButtons.addEventListener('click', function() {
-//     console.log('playerOne')
-//   })
+  playerOneButton.addEventListener('click', () => {
+    playerTurn = 'player1'
+    Game()
+    GameState();
+  })
 
-// }
+  playerTwoButton.addEventListener('click', () => {
+    playerTurn = 'player2'
+    Game()
+    GameState();
+  })
 
-console.log(typeof(gameBoard))
-console.log(gameBoard.gameBoardArray)
-// PlayerSelect();
-Game();
+}
+
+// console.log(typeof(gameBoard))
+// console.log(gameBoard.gameBoardArray)
+PlayerSelect();
