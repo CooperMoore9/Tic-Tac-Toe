@@ -25,11 +25,10 @@ const Game = () => {
       btn.addEventListener('click', function() {
         if(playerTurn == 'player1'){
           currentPlayerMarker = 'X'
-          this.textContent = 'X'
           botTurn = 'player2'
+          BotChoice()
         }else if(playerTurn == 'player2'){
           currentPlayerMarker = 'O'
-          this.textContent = 'O'
           botTurn = 'player1'
         }
       });
@@ -42,13 +41,26 @@ const GameState = () => {
     btn.addEventListener('click', function() {
       let markerPosition = parseInt(this.id)
       gameBoard.gameBoardArray.splice(markerPosition, 1, currentPlayerMarker)
+      
+      this.textContent = currentPlayerMarker
       console.log(gameBoard.gameBoardArray)
       
     });
   }
 }
 
-const botChoice = () => {
+const BotChoice = () => {
+  const boardButtons = document.querySelectorAll('.boardButton');
+  let botSpot = Math.floor(Math.random()*gameBoard.gameBoardArray.length)
+
+  // console.log(botSpot)
+  // console.log(gameBoard.gameBoardArray[botSpot])
+  if(gameBoard.gameBoardArray[botSpot] == ''){
+    gameBoard.gameBoardArray.splice(botSpot, 1, 'O')
+    boardButtons[botSpot].textContent = 'O'
+  }else {
+    BotChoice()
+  }
 
 }
 
