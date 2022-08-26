@@ -12,8 +12,9 @@ const gameBoard = (() => {
     let gameBoardArray = ['', '', '', '', '', '', '', '', '']
     let playerTurn = ''
     let currentPlayerMarker = ''
+    let botTurn = ''
 
-    return {gameBoardArray, playerTurn, currentPlayerMarker}    
+    return {gameBoardArray, playerTurn, currentPlayerMarker, botTurn}    
 })();
 
 const Game = () => {
@@ -25,11 +26,11 @@ const Game = () => {
         if(playerTurn == 'player1'){
           currentPlayerMarker = 'X'
           this.textContent = 'X'
-          playerTurn = 'player2'
+          botTurn = 'player2'
         }else if(playerTurn == 'player2'){
           currentPlayerMarker = 'O'
           this.textContent = 'O'
-          playerTurn = 'player1'
+          botTurn = 'player1'
         }
       });
     }
@@ -44,7 +45,11 @@ const GameState = () => {
       console.log(gameBoard.gameBoardArray)
       
     });
+  }
 }
+
+const botChoice = () => {
+
 }
 
 const PlayerSelect = () => {
