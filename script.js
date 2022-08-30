@@ -17,6 +17,16 @@ const gameBoard = (() => {
     return {gameBoardArray, playerTurn, currentPlayerMarker, botTurn}    
 })();
 
+// const WINNING_MOVES = 
+// [[0, 1, 2],
+// [3, 4, 5],
+// [6, 7, 8],
+// [0, 3, 6],
+// [1, 4, 7],
+// [2, 5, 8],
+// [0, 4, 8],
+// [2, 4, 6]];
+
 const Game = () => {
 
   const boardButtons = document.querySelectorAll('.boardButton');
@@ -26,7 +36,6 @@ const Game = () => {
         if(playerTurn == 'player1'){
           currentPlayerMarker = 'X'
           botTurn = 'player2'
-          BotChoice()
         }else if(playerTurn == 'player2'){
           currentPlayerMarker = 'O'
           botTurn = 'player1'
@@ -39,29 +48,32 @@ const GameState = () => {
   const boardButtons = document.querySelectorAll('.boardButton');
   for (btn of boardButtons) {
     btn.addEventListener('click', function() {
-      let markerPosition = parseInt(this.id)
-      gameBoard.gameBoardArray.splice(markerPosition, 1, currentPlayerMarker)
-      
-      this.textContent = currentPlayerMarker
-      console.log(gameBoard.gameBoardArray)
-      
+      let markerPosition = parseInt(this.id);
+      gameBoard.gameBoardArray[markerPosition] = currentPlayerMarker;
+      this.textContent = currentPlayerMarker;
+      BotChoice()
     });
   }
 }
 
 const BotChoice = () => {
   const boardButtons = document.querySelectorAll('.boardButton');
-  let botSpot = Math.floor(Math.random()*gameBoard.gameBoardArray.length)
+  botSpot = Math.floor(Math.random()*9);
+  console.log(gameBoard.gameBoardArray[botSpot]);
 
-  // console.log(botSpot)
-  // console.log(gameBoard.gameBoardArray[botSpot])
-  if(gameBoard.gameBoardArray[botSpot] == ''){
-    gameBoard.gameBoardArray.splice(botSpot, 1, 'O')
-    boardButtons[botSpot].textContent = 'O'
-  }else {
-    BotChoice()
+  botLoop(botSpot)
+  
+  function botLoop(botSpot){
+    if(gameBoard.gameBoardArray[botSpot] === ''){
+      gameBoard.gameBoardArray[botSpot] = 'O';
+      boardButtons[botSpot].textContent = 'O';
+    }else {
+      let botSpot = Math.floor(Math.random()*9);
+      botLoop(botSpot);
+      
+    }
+    console.log(gameBoard.gameBoardArray)
   }
-
 }
 
 const PlayerSelect = () => {
@@ -85,3 +97,4 @@ const PlayerSelect = () => {
 // console.log(typeof(gameBoard))
 // console.log(gameBoard.gameBoardArray)
 PlayerSelect();
+
