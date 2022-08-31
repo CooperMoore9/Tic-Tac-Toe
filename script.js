@@ -9,23 +9,33 @@
 // Possible solution to GameState; Every time a button is clicked, check the text context of the board, check which class it has then add it to the array at the class of the html element
 
 const gameBoard = (() => {
+
+  const WINNING_MOVES = 
+    [[0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]];
+
     let gameBoardArray = ['', '', '', '', '', '', '', '', '']
     let playerTurn = ''
     let currentPlayerMarker = ''
     let botTurn = ''
+    let turnCounter = 0
 
-    return {gameBoardArray, playerTurn, currentPlayerMarker, botTurn}    
+    return {
+      gameBoardArray, 
+      playerTurn, 
+      currentPlayerMarker, 
+      botTurn, 
+      turnCounter
+    }    
 })();
 
-// const WINNING_MOVES = 
-// [[0, 1, 2],
-// [3, 4, 5],
-// [6, 7, 8],
-// [0, 3, 6],
-// [1, 4, 7],
-// [2, 5, 8],
-// [0, 4, 8],
-// [2, 4, 6]];
+
 
 const Game = () => {
 
@@ -48,10 +58,15 @@ const GameState = () => {
   const boardButtons = document.querySelectorAll('.boardButton');
   for (btn of boardButtons) {
     btn.addEventListener('click', function() {
-      let markerPosition = parseInt(this.id);
-      gameBoard.gameBoardArray[markerPosition] = currentPlayerMarker;
-      this.textContent = currentPlayerMarker;
-      BotChoice()
+      if(gameBoard.gameBoardArray[this.id] === ''){
+        let markerPosition = parseInt(this.id);
+        gameBoard.gameBoardArray[markerPosition] = currentPlayerMarker;
+        this.textContent = currentPlayerMarker;
+        gameBoard.turnCounter += 1
+        if(gameBoard.turnCounter < 9){
+        BotChoice()
+        }
+      }
     });
   }
 }
@@ -59,7 +74,6 @@ const GameState = () => {
 const BotChoice = () => {
   const boardButtons = document.querySelectorAll('.boardButton');
   botSpot = Math.floor(Math.random()*9);
-  console.log(gameBoard.gameBoardArray[botSpot]);
 
   botLoop(botSpot)
   
@@ -67,6 +81,7 @@ const BotChoice = () => {
     if(gameBoard.gameBoardArray[botSpot] === ''){
       gameBoard.gameBoardArray[botSpot] = 'O';
       boardButtons[botSpot].textContent = 'O';
+      gameBoard.turnCounter += 1
     }else {
       let botSpot = Math.floor(Math.random()*9);
       botLoop(botSpot);
@@ -81,6 +96,8 @@ const PlayerSelect = () => {
   const playerTwoButton = document.getElementById('playerTwo')
   
   playerOneButton.addEventListener('click', () => {
+    document.getElementById('playerOne').disabled = true;
+    document.getElementById('playerTwo').disabled = true;
     playerTurn = 'player1'
     Game()
     GameState();
@@ -94,7 +111,5 @@ const PlayerSelect = () => {
 
 }
 
-// console.log(typeof(gameBoard))
-// console.log(gameBoard.gameBoardArray)
 PlayerSelect();
 

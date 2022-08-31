@@ -24,6 +24,13 @@ body {
     font-size: 38px;
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px none;
+  background-color: grey;
+  color: black;
+}
+
 .gameBoardWrapper {
     display: flex;
     justify-content: center;
