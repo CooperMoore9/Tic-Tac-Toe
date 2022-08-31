@@ -31,10 +31,29 @@ const gameBoard = (() => {
       playerTurn, 
       currentPlayerMarker, 
       botTurn, 
-      turnCounter
+      turnCounter,
+      WINNING_MOVES
     }    
 })();
 
+function winnah() {
+  for (let i = 0; i < gameBoard.WINNING_MOVES.length; i++){
+    let winnerCounter = 0
+    let variable = gameBoard.WINNING_MOVES[i]
+    console.log(variable)
+    for (let j = 0; j < variable.length; j++){
+      console.log(variable[j])
+      if(gameBoard.gameBoardArray[variable[j]] === "X"){
+        winnerCounter += 1;
+        if(winnerCounter === 3){
+          console.log('winnah')
+        }
+      }else{
+        winnerCounter = 0
+      }
+    }
+  }
+}
 
 
 const Game = () => {
@@ -104,12 +123,12 @@ const PlayerSelect = () => {
   })
 
   playerTwoButton.addEventListener('click', () => {
+    document.getElementById('playerOne').disabled = true;
+    document.getElementById('playerTwo').disabled = true;
     playerTurn = 'player2'
     Game()
     GameState();
   })
-
 }
 
 PlayerSelect();
-
