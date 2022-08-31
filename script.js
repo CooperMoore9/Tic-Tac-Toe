@@ -20,11 +20,12 @@ const gameBoard = (() => {
     [0, 4, 8],
     [2, 4, 6]];
 
-    let gameBoardArray = ['', '', '', '', '', '', '', '', '']
-    let playerTurn = ''
-    let currentPlayerMarker = ''
-    let botTurn = ''
-    let turnCounter = 0
+    let gameBoardArray = ['', '', '', '', '', '', '', '', ''];
+    let playerTurn = '';
+    let currentPlayerMarker = '';
+    let botTurn = '';
+    let turnCounter = 0;
+    let botMarker = '';
 
     return {
       gameBoardArray, 
@@ -32,24 +33,25 @@ const gameBoard = (() => {
       currentPlayerMarker, 
       botTurn, 
       turnCounter,
-      WINNING_MOVES
+      WINNING_MOVES,
+      botMarker
     }    
 })();
 
 function winnah() {
   for (let i = 0; i < gameBoard.WINNING_MOVES.length; i++){
-    let winnerCounter = 0
+    let winnerCounter = 0;
     let variable = gameBoard.WINNING_MOVES[i]
-    console.log(variable)
+    console.log(variable);
     for (let j = 0; j < variable.length; j++){
-      console.log(variable[j])
+      console.log(variable[j]);
       if(gameBoard.gameBoardArray[variable[j]] === "X"){
         winnerCounter += 1;
         if(winnerCounter === 3){
-          console.log('winnah')
+          console.log('winnah');
         }
       }else{
-        winnerCounter = 0
+        winnerCounter = 0;
       }
     }
   }
@@ -62,12 +64,14 @@ const Game = () => {
   
   for (btn of boardButtons) {
       btn.addEventListener('click', function() {
-        if(playerTurn == 'player1'){
-          currentPlayerMarker = 'X'
-          botTurn = 'player2'
-        }else if(playerTurn == 'player2'){
-          currentPlayerMarker = 'O'
-          botTurn = 'player1'
+        if(playerTurn === 'player1'){
+          currentPlayerMarker = 'X';
+          botMarker = 'O';
+          botTurn = 'player2';
+        }else if(playerTurn === 'player2'){
+          currentPlayerMarker = 'O';
+          botMarker = 'X';
+          botTurn = 'player1';
         }
       });
     }
@@ -81,9 +85,9 @@ const GameState = () => {
         let markerPosition = parseInt(this.id);
         gameBoard.gameBoardArray[markerPosition] = currentPlayerMarker;
         this.textContent = currentPlayerMarker;
-        gameBoard.turnCounter += 1
+        gameBoard.turnCounter += 1;
         if(gameBoard.turnCounter < 9){
-        BotChoice()
+        BotChoice();
         }
       }
     });
@@ -98,8 +102,8 @@ const BotChoice = () => {
   
   function botLoop(botSpot){
     if(gameBoard.gameBoardArray[botSpot] === ''){
-      gameBoard.gameBoardArray[botSpot] = 'O';
-      boardButtons[botSpot].textContent = 'O';
+      gameBoard.gameBoardArray[botSpot] = botMarker;
+      boardButtons[botSpot].textContent = botMarker;
       gameBoard.turnCounter += 1
     }else {
       let botSpot = Math.floor(Math.random()*9);
@@ -117,17 +121,19 @@ const PlayerSelect = () => {
   playerOneButton.addEventListener('click', () => {
     document.getElementById('playerOne').disabled = true;
     document.getElementById('playerTwo').disabled = true;
-    playerTurn = 'player1'
-    Game()
+    playerTurn = 'player1';
+    Game();
     GameState();
   })
 
   playerTwoButton.addEventListener('click', () => {
     document.getElementById('playerOne').disabled = true;
     document.getElementById('playerTwo').disabled = true;
-    playerTurn = 'player2'
-    Game()
+    playerTurn = 'player2';
+    botMarker = 'X'
+    Game();
     GameState();
+    BotChoice();
   })
 }
 
