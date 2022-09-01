@@ -26,6 +26,8 @@ const gameBoard = (() => {
     let botTurn = '';
     let turnCounter = 0;
     let botMarker = '';
+    let winner = '';
+    let lastMarkerPlaced = '';
 
     return {
       gameBoardArray, 
@@ -34,24 +36,22 @@ const gameBoard = (() => {
       botTurn, 
       turnCounter,
       WINNING_MOVES,
-      botMarker
+      botMarker,
+      winner
     }    
 })();
 
 function winnah() {
   for (let i = 0; i < gameBoard.WINNING_MOVES.length; i++){
     let winnerCounter = 0;
-    let variable = gameBoard.WINNING_MOVES[i]
-    console.log(variable);
-    for (let j = 0; j < variable.length; j++){
-      console.log(variable[j]);
-      if(gameBoard.gameBoardArray[variable[j]] === "X"){
+    let winningMoveArrays = gameBoard.WINNING_MOVES[i]
+    let currentMarker = gameBoard.lastMarkerPlaced
+    for (let j = 0; j < winningMoveArrays.length; j++){
+      if(gameBoard.gameBoardArray[winningMoveArrays[j]] === currentMarker){
         winnerCounter += 1;
         if(winnerCounter === 3){
           console.log('winnah');
         }
-      }else{
-        winnerCounter = 0;
       }
     }
   }
@@ -87,6 +87,8 @@ const GameState = () => {
         this.textContent = currentPlayerMarker;
         gameBoard.turnCounter += 1;
         if(gameBoard.turnCounter < 9){
+          gameBoard.lastMarkerPlaced = currentPlayerMarker;
+        winnah();
         BotChoice();
         }
       }
@@ -105,12 +107,12 @@ const BotChoice = () => {
       gameBoard.gameBoardArray[botSpot] = botMarker;
       boardButtons[botSpot].textContent = botMarker;
       gameBoard.turnCounter += 1
+      gameBoard.lastMarkerPlaced = botMarker;
     }else {
       let botSpot = Math.floor(Math.random()*9);
       botLoop(botSpot);
       
     }
-    console.log(gameBoard.gameBoardArray)
   }
 }
 
