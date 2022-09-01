@@ -37,7 +37,8 @@ const gameBoard = (() => {
       turnCounter,
       WINNING_MOVES,
       botMarker,
-      winner
+      winner,
+      lastMarkerPlaced
     }    
 })();
 
@@ -106,8 +107,9 @@ const BotChoice = () => {
     if(gameBoard.gameBoardArray[botSpot] === ''){
       gameBoard.gameBoardArray[botSpot] = botMarker;
       boardButtons[botSpot].textContent = botMarker;
-      gameBoard.turnCounter += 1
       gameBoard.lastMarkerPlaced = botMarker;
+      gameBoard.turnCounter += 1
+      winnah();
     }else {
       let botSpot = Math.floor(Math.random()*9);
       botLoop(botSpot);
