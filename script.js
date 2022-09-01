@@ -88,10 +88,10 @@ const GameState = () => {
         this.textContent = currentPlayerMarker;
         gameBoard.turnCounter += 1;
         if(gameBoard.turnCounter < 9){
-          gameBoard.lastMarkerPlaced = currentPlayerMarker;
-        winnah();
-        BotChoice();
+          BotChoice();
         }
+        gameBoard.lastMarkerPlaced = currentPlayerMarker;
+          winnah();
       }
     });
   }
