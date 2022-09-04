@@ -50,32 +50,59 @@ function winnah() {
     for (let j = 0; j < winningMoveArrays.length; j++){
       if(gameBoard.gameBoardArray[winningMoveArrays[j]] === currentMarker){
         winnerCounter += 1;
-        if(winnerCounter === 3){
-          console.log('winnah');
+      }
+      if(winnerCounter === 3){
+        if(currentMarker === 'X'){
+          console.log('Player 1 Win')
+          gameBoard.winner = 'Player 1'
+          reset()
+        }else if(currentMarker === 'O'){
+          console.log('Player 2 Win')
+          gameBoard.winner = 'Player 2'
+          reset()
         }
+      }else if(winnerCounter !== 3 && gameBoard.turnCounter >= 9){
+        console.log('Tie')
+        gameBoard.winner = 'Tie'
+        reset()
       }
     }
   }
+}
+
+function reset() {
+  const p1ScoreDisplay = document.getElementById('p1Score')
+  const p2ScoreDisplay = document.getElementById('p2Score')
+  let p1Score = parseInt(p1ScoreDisplay.textContent)
+  let p2Score = parseInt(p2ScoreDisplay.textContent)
+
+    if(gameBoard.winner === 'Player 1'){
+      p1Score += 1
+      p1ScoreDisplay.textContent = p1Score
+    }else if(gameBoard.winner === 'Player 2'){
+    p2Score += 1
+    p2ScoreDisplay.textContent = p2Score
+  }  
 }
 
 
 const Game = () => {
 
   const boardButtons = document.querySelectorAll('.boardButton');
-  
+
   for (btn of boardButtons) {
-      btn.addEventListener('click', function() {
-        if(playerTurn === 'player1'){
-          currentPlayerMarker = 'X';
-          botMarker = 'O';
-          botTurn = 'player2';
-        }else if(playerTurn === 'player2'){
-          currentPlayerMarker = 'O';
-          botMarker = 'X';
-          botTurn = 'player1';
-        }
-      });
-    }
+    btn.addEventListener('click', function() {
+      if(playerTurn === 'player1'){
+        currentPlayerMarker = 'X';
+        botMarker = 'O';
+        botTurn = 'player2';
+      }else if(playerTurn === 'player2'){
+        currentPlayerMarker = 'O';
+        botMarker = 'X';
+        botTurn = 'player1';
+      }
+    });
+  }
 }
 
 const GameState = () => {
@@ -87,11 +114,11 @@ const GameState = () => {
         gameBoard.gameBoardArray[markerPosition] = currentPlayerMarker;
         this.textContent = currentPlayerMarker;
         gameBoard.turnCounter += 1;
-        if(gameBoard.turnCounter < 9){
+        winnah();
+        if(gameBoard.turnCounter < 9 && gameBoard.winner === ''){
           BotChoice();
         }
         gameBoard.lastMarkerPlaced = currentPlayerMarker;
-          winnah();
       }
     });
   }

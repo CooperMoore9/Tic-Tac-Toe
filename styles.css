@@ -14,10 +14,21 @@ body {
 .playerWrapper {
     display: flex;
     margin-top: 50px;
-    margin-bottom: 50px;
     justify-content: space-around;
     align-items: center;
     font-size: 32px;
+}
+
+.p1Wrapper, .p2Wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#p1Score, #p2Score {
+    margin-top: 12px;
+    font-size: 48px;
 }
 
 #playerOne, #playerTwo {
