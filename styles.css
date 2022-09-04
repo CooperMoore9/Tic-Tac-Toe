@@ -16,14 +16,17 @@ body {
     margin-top: 50px;
     justify-content: space-around;
     align-items: center;
-    font-size: 32px;
+    font-size: 2vw;
 }
 
 #winnerDisplay {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 2.25vw;
 }
 
 .p1Wrapper, .p2Wrapper {
@@ -35,11 +38,11 @@ body {
 
 #p1Score, #p2Score {
     margin-top: 12px;
-    font-size: 48px;
+    font-size: 2.25vw;
 }
 
 #playerOne, #playerTwo {
-    font-size: 38px;
+    font-size: 2.25vw;
 }
 
 .boardButton:disabled {
@@ -64,7 +67,6 @@ button[disabled]{
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 60vh;
 }
 
 .gameBoard {
@@ -74,6 +76,12 @@ button[disabled]{
     aspect-ratio: 1/1;
     width: 30%;
     height: auto;
+}
+
+#resetButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.5vw;
 }
 
 .boardButton {

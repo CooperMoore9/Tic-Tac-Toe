@@ -78,24 +78,46 @@ function reset() {
 
   const boardButtons = document.querySelectorAll('.boardButton');
   const winnerDisplay = document.getElementById('winnerDisplay')
-  winnerDisplay.style.display = 'flex'
-
-  for (btn of boardButtons) {
-    btn.disabled = true;
-  }
-
+  const resetButton = document.getElementById('resetButton')
+  const winnerText = document.getElementById('winnerText')
   const p1ScoreDisplay = document.getElementById('p1Score')
   const p2ScoreDisplay = document.getElementById('p2Score')
   let p1Score = parseInt(p1ScoreDisplay.textContent)
   let p2Score = parseInt(p2ScoreDisplay.textContent)
 
+  winnerDisplay.style.display = 'flex'
+
+  if(gameBoard.winner === 'Player 1' || gameBoard.winner === 'Player 2'){
+    winnerText.textContent = `${gameBoard.winner}` + ` wins`;
+  }else {
+    winnerText.textContent = 'TIE'
+  }
+  for (btn of boardButtons) {
+    btn.disabled = true;
+  }
     if(gameBoard.winner === 'Player 1'){
       p1Score += 1
       p1ScoreDisplay.textContent = p1Score
     }else if(gameBoard.winner === 'Player 2'){
       p2Score += 1
       p2ScoreDisplay.textContent = p2Score
-  }  
+  }
+
+  resetButton.addEventListener('click', () => {
+    winnerDisplay.style.display = 'none'
+    gameBoard.gameBoardArray = ['', '', '', '', '', '', '', '', ''];
+    gameBoard.gameBoardArray.forEach(element => {
+    });
+    for (btn of boardButtons) {
+      btn.disabled = false;
+      btn.textContent = '';
+    }
+    gameBoard.turnCounter = 0;
+    gameBoard.winner = '';
+    
+    Game();
+    GameState();
+  })
 }
 
 
@@ -159,8 +181,6 @@ const BotChoice = () => {
 }
 
 const PlayerSelect = () => {
-  const winnerDisplay = document.getElementById('winnerDisplay')
-  winnerDisplay.style.display = 'none'
 
   const playerOneButton = document.getElementById('playerOne')
   const playerTwoButton = document.getElementById('playerTwo')
