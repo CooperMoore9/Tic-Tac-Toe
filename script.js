@@ -56,21 +56,34 @@ function winnah() {
           console.log('Player 1 Win')
           gameBoard.winner = 'Player 1'
           reset()
+          return
         }else if(currentMarker === 'O'){
           console.log('Player 2 Win')
           gameBoard.winner = 'Player 2'
           reset()
+          return
         }
-      }else if(winnerCounter !== 3 && gameBoard.turnCounter >= 9){
-        console.log('Tie')
-        gameBoard.winner = 'Tie'
-        reset()
       }
     }
+  }
+  if(gameBoard.turnCounter >= 9 && gameBoard.winner === ''){
+    console.log('Tie')
+    gameBoard.winner = 'Tie'
+    reset()
+    return
   }
 }
 
 function reset() {
+
+  const boardButtons = document.querySelectorAll('.boardButton');
+  const winnerDisplay = document.getElementById('winnerDisplay')
+  winnerDisplay.style.display = 'flex'
+
+  for (btn of boardButtons) {
+    btn.disabled = true;
+  }
+
   const p1ScoreDisplay = document.getElementById('p1Score')
   const p2ScoreDisplay = document.getElementById('p2Score')
   let p1Score = parseInt(p1ScoreDisplay.textContent)
@@ -80,8 +93,8 @@ function reset() {
       p1Score += 1
       p1ScoreDisplay.textContent = p1Score
     }else if(gameBoard.winner === 'Player 2'){
-    p2Score += 1
-    p2ScoreDisplay.textContent = p2Score
+      p2Score += 1
+      p2ScoreDisplay.textContent = p2Score
   }  
 }
 
@@ -146,6 +159,9 @@ const BotChoice = () => {
 }
 
 const PlayerSelect = () => {
+  const winnerDisplay = document.getElementById('winnerDisplay')
+  winnerDisplay.style.display = 'none'
+
   const playerOneButton = document.getElementById('playerOne')
   const playerTwoButton = document.getElementById('playerTwo')
   

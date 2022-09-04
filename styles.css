@@ -19,6 +19,13 @@ body {
     font-size: 32px;
 }
 
+#winnerDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .p1Wrapper, .p2Wrapper {
     display: flex;
     flex-direction: column;
@@ -35,6 +42,16 @@ body {
     font-size: 38px;
 }
 
+.boardButton:disabled {
+    display: flex;
+    border-style: solid;
+    background-color: lavender;
+    border-width: 2px;
+    justify-content: center;
+    align-items: center;
+    font-size: 8vw;
+}
+
 button:disabled,
 button[disabled]{
   border: 1px none;
@@ -47,7 +64,7 @@ button[disabled]{
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 80vh;
+    height: 60vh;
 }
 
 .gameBoard {
@@ -65,8 +82,9 @@ button[disabled]{
     justify-content: center;
     align-items: center;
     font-size: 8vw;
+    background-color: rgb(230, 230, 250);
 }
 
 .boardButton:hover {
-    background-color: lightgrey;
+    background-color:rgb(214, 214, 255);
 }
