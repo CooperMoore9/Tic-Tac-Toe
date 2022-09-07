@@ -53,12 +53,10 @@ function winnah() {
       }
       if(winnerCounter === 3){
         if(currentMarker === 'X'){
-          console.log('Player 1 Win')
           gameBoard.winner = 'Player 1'
           reset()
           return
         }else if(currentMarker === 'O'){
-          console.log('Player 2 Win')
           gameBoard.winner = 'Player 2'
           reset()
           return
@@ -112,11 +110,15 @@ function reset() {
       btn.disabled = false;
       btn.textContent = '';
     }
-    gameBoard.turnCounter = 0;
-    gameBoard.winner = '';
-    
-    Game();
-    GameState();
+      
+      gameBoard.turnCounter = 0;
+      gameBoard.winner = '';
+      Game();
+      GameState();
+      if(playerTurn === 'player2'){
+        BotChoice();
+      }
+      
   })
 }
 

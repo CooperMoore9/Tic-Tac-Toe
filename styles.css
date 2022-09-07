@@ -8,12 +8,13 @@ html {
 }
 
 body {
-    background-color: grey;
+    background-color: rgb(47, 47, 47);
 }
 
-.playerWrapper {
+#playerWrapper {
     display: flex;
     margin-top: 50px;
+    height: 14vh;
     justify-content: space-around;
     align-items: center;
     font-size: 2vw;
@@ -24,6 +25,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 12vh;
     margin-top: 12px;
     margin-bottom: 12px;
     font-size: 2.25vw;
@@ -39,16 +41,32 @@ body {
 #p1Score, #p2Score {
     margin-top: 12px;
     font-size: 2.25vw;
+    color: lavender;
 }
 
 #playerOne, #playerTwo {
     font-size: 2.25vw;
+    border-radius: 16px;
+    border-color: lavender;
+    background-color: lavender;
+
+}
+
+#playerOne:hover, #playerTwo:hover {
+    background-color: #C2C2FF;
+    border-color: #C2C2FF;
+
+}
+
+#playerOne:disabled, #playerTwo:disabled {
+    background-color: rgb(47, 47, 47);
 }
 
 .boardButton:disabled {
     display: flex;
     border-style: solid;
-    background-color: lavender;
+    background-color: #1F1F1F;
+    color: lavender;
     border-width: 2px;
     justify-content: center;
     align-items: center;
@@ -58,8 +76,8 @@ body {
 button:disabled,
 button[disabled]{
   border: 1px none;
-  background-color: grey;
-  color: black;
+  background-color: rgb(47, 47, 47);
+  color: lavender;
 }
 
 .gameBoardWrapper {
@@ -79,9 +97,18 @@ button[disabled]{
 }
 
 #resetButton {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 10px;
-    font-size: 1.5vw;
+    width: 12vw;
+    font-size: 2.25vw;
+    border-radius: 16px;
+    border-color: lavender;
+    background-color: lavender;
+}
+
+#resetButton:hover {
+    background-color: #C2C2FF;
+    border-color: #C2C2FF;
 }
 
 .boardButton {
@@ -90,9 +117,19 @@ button[disabled]{
     justify-content: center;
     align-items: center;
     font-size: 8vw;
-    background-color: rgb(230, 230, 250);
+    background-color:rgb(47, 47, 47);
+    border-color: lavender;
+    color: lavender;
 }
 
 .boardButton:hover {
-    background-color:rgb(214, 214, 255);
+    background-color:rgb(61, 61, 61);
+}
+
+.boardButton:hover:disabled {
+    background-color:rgb(61, 61, 61);
+}
+
+#winnerText {
+    color: #9999FF;
 }
